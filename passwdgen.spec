@@ -6,6 +6,7 @@ Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{name}-%{version}.tar.gz
+# Source0-md5:	097cf193d1b040cf0d135945714faa83
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-gcc3.patch
 URL:		http://members.home.com/denisl/passwdgen/
