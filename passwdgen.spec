@@ -56,7 +56,7 @@ Statyczna wersja biblioteki passwdgen.
 %setup -q
 
 %build
-%configure
+%configure2_13
 %{__make}
 
 %install
