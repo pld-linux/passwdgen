@@ -1,0 +1,20 @@
+--- passwdgen-2.2/class/Makefile.am.orig	Thu Nov 23 11:25:18 2000
++++ passwdgen-2.2/class/Makefile.am	Sat Oct 12 15:24:17 2002
+@@ -5,8 +5,7 @@
+ libpasswdgen_la_LDFLAGS = \
+         -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)    \
+         -release $(LT_RELEASE)					\
+-        -export-dynamic \
+-        $(X_LIBS)
++        -export-dynamic
+ 
+ libpasswdgenincludedir = $(prefix)/include/passwdgen
+ passwdgen_public_h_sources = password.h pwdgenerr.h
+--- passwdgen-2.2/src/Makefile.am.orig	Tue Nov 21 12:26:13 2000
++++ passwdgen-2.2/src/Makefile.am	Sat Oct 12 15:32:17 2002
+@@ -1,4 +1,4 @@
+-LDFLAGS = -L../class/.libs -lpasswdgen
++LDFLAGS = -L../class -lpasswdgen
+ 
+ bin_PROGRAMS		= passwdgen
+ 

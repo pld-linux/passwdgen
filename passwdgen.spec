@@ -2,13 +2,18 @@ Summary:	Random password generator
 Summary(pl):	Generator losowych hase³
 Name:		passwdgen
 Version:	2.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{name}-%{version}.tar.gz
+Patch0:		%{name}-amfix.patch
+Patch1:		%{name}-gcc3.patch
 URL:		http://members.home.com/denisl/passwdgen/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 passwdgen is a utility for generating random passwords. Amongst
@@ -46,16 +51,20 @@ Statyczna wersja biblioteki passwdgen.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
-%configure2_13
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
-
-gzip -9nf AUTHORS NEWS README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -65,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS NEWS README
 %attr(755,root,root) %{_libdir}/*.so.*.*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
