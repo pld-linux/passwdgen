@@ -5,8 +5,6 @@ Version:	2.2
 Release:	1
 License:	GPL
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{name}-%{version}.tar.gz
 URL:		http://members.home.com/denisl/passwdgen/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -26,13 +24,6 @@ znakСw wprowadzanych jedn╠ rЙk╠.
 Summary:	passwdgen development package
 Summary(pl):	passwdgen dla programistСw
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -45,13 +36,6 @@ Pliki nagЁСwkowe i skrypt libtoola do biblioteki passwdgen.
 Summary:	passwdgen static library
 Summary(pl):	Statyczna biblioteka passwdgen
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
