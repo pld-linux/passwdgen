@@ -9,6 +9,7 @@ Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{na
 # Source0-md5:	097cf193d1b040cf0d135945714faa83
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-gcc3.patch
+Patch2:		%{name}-acfix.patch
 URL:		http://members.home.com/denisl/passwdgen/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -55,6 +56,7 @@ Statyczna wersja biblioteki passwdgen.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
