@@ -2,7 +2,7 @@ Summary:	Random password generator
 Summary(pl):	Generator losowych hase³
 Name:		passwdgen
 Version:	2.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{name}-%{version}.tar.gz
@@ -13,7 +13,7 @@ URL:		http://members.home.com/denisl/passwdgen/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:1.4d
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -30,7 +30,8 @@ znaków wprowadzanych jedn± rêk±.
 Summary:	passwdgen development package
 Summary(pl):	passwdgen dla programistów
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
+Requires:	libstdc++-devel
 
 %description devel
 Header files and libtool script for linking with passwdgen library.
@@ -42,7 +43,7 @@ Pliki nag³ówkowe i skrypt libtoola do biblioteki passwdgen.
 Summary:	passwdgen static library
 Summary(pl):	Statyczna biblioteka passwdgen
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of passwdgen library.
@@ -65,7 +66,9 @@ Statyczna wersja biblioteki passwdgen.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
