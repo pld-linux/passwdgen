@@ -1,0 +1,139 @@
+diff -burN passwdgen-2.2.orig/class/password.cpp passwdgen-2.2/class/password.cpp
+--- passwdgen-2.2.orig/class/password.cpp	2005-08-07 13:00:24.000000000 +0000
++++ passwdgen-2.2/class/password.cpp	2005-08-07 13:02:25.000000000 +0000
+@@ -95,13 +95,13 @@
+   isPronounceable = a;
+ }
+ 
+-char *password::generate ()
++char *password::generate (int urandom)
+ {
+   char randChar;
+   short passwdLength;
+   short counter[2];
+ 
+-  seedRandom ();
++  seedRandom (urandom);
+ 
+   if (minLength == maxLength) {
+     passwdLength = maxLength;
+@@ -134,11 +134,14 @@
+   throw z;
+ }
+ 
+-void password::seedRandom () throw (pwdgenerr)
++void password::seedRandom (int urandom) throw (pwdgenerr)
+ {
+   char randomSeed[4];
+   ifstream devRandom;
+  
++  if (urandom)
++    devRandom.open ("/dev/urandom");
++  else
+   devRandom.open ("/dev/random");
+   if (devRandom.fail()) {
+     pwdgenerr z ("unable to open /dev/random.", 2);
+diff -burN passwdgen-2.2.orig/class/password.h passwdgen-2.2/class/password.h
+--- passwdgen-2.2.orig/class/password.h	2005-08-07 13:00:24.000000000 +0000
++++ passwdgen-2.2/class/password.h	2005-08-07 13:02:25.000000000 +0000
+@@ -53,12 +53,12 @@
+     void length (int min, int max);
+     void hand (int hand); 
+     void pronounceable (bool pronounce);
+-    char *generate ();
++    char *generate (int urandom);
+     friend std::ostream &operator << (std::ostream &os, password &a);
+ 
+   protected:
+     void lengthErr () throw (pwdgenerr);
+-    void seedRandom () throw (pwdgenerr); 
++    void seedRandom (int urandom) throw (pwdgenerr); 
+     char getASCII ();
+     int checkHand (char randChar, short *counter);
+     int checkPronounce (char randChar, short *counter);
+diff -burN passwdgen-2.2.orig/src/cli.cpp passwdgen-2.2/src/cli.cpp
+--- passwdgen-2.2.orig/src/cli.cpp	2005-08-07 13:00:24.000000000 +0000
++++ passwdgen-2.2/src/cli.cpp	2005-08-07 13:02:25.000000000 +0000
+@@ -59,6 +59,7 @@
+        << "      --max=LENGTH\tmaximum password length (4 min, 20 max, 8 default)\n\n"
+        << "other options:\n"
+        << "  -q, --quiet\t\toutput password only, no verbosity\n"
++       << "  -u, --urandom\t\tuse /dev/urandom instead of /dev/random\n"
+        << "      --version\t\tdisplay version information and exit\n"
+        << "      --help\t\tdisplay this help and exit\n\n"
+        << "Report bugs to <denis@lemire.com>.\n";
+@@ -69,7 +70,7 @@
+   cout << PACKAGE << ' ' << VERSION << '\n';
+ }
+ 
+-int parseCmdLine (int argc, char **argv, password *a, int *quietOutput)
++int parseCmdLine (int argc, char **argv, password *a, int *quietOutput, int *urandom)
+ {
+   int option, option_index;
+   int passwdType = 0, minLength = 6, maxLength = 8;
+@@ -90,6 +91,7 @@
+     {"version", no_argument, 0, 'v'},
+     {"help", no_argument, 0, 'h'},
+     {"quiet", no_argument, 0, 'q'},
++    {"urandom", no_argument, 0, 'u'},
+     {NULL, 0, NULL, 0}
+   };
+ 
+@@ -100,7 +102,7 @@
+ 
+   do {
+     option_index = 0;
+-    option = getopt_long (argc, argv, "aA1@frbpq", long_options, &option_index);
++    option = getopt_long (argc, argv, "aA1@frbpqu", long_options, &option_index);
+ 
+     switch (option) {
+       case 'a': passwdType = passwdType + 1; break;
+@@ -115,6 +117,7 @@
+       case 'b': a->hand (ALTERNATE); break;
+       case 'p': a->pronounceable (true); break;
+       case 'q': *quietOutput = 1; break;
++      case 'u': *urandom = 1; break;
+       case 'v': displayVersion (); exit(0); break;
+       case 'h': displayHelp (); exit(0); break;
+ 
+diff -burN passwdgen-2.2.orig/src/cli.h passwdgen-2.2/src/cli.h
+--- passwdgen-2.2.orig/src/cli.h	2005-08-07 13:00:24.000000000 +0000
++++ passwdgen-2.2/src/cli.h	2005-08-07 13:02:25.000000000 +0000
+@@ -20,4 +20,4 @@
+   #include "../class/password.h"
+ #endif
+ 
+-int parseCmdLine (int argc, char **argv, password *a, int *quietOutput);
++int parseCmdLine (int argc, char **argv, password *a, int *quietOutput, int *urandom);
+diff -burN passwdgen-2.2.orig/src/main.cpp passwdgen-2.2/src/main.cpp
+--- passwdgen-2.2.orig/src/main.cpp	2005-08-07 13:00:24.000000000 +0000
++++ passwdgen-2.2/src/main.cpp	2005-08-07 13:02:25.000000000 +0000
+@@ -26,11 +26,12 @@
+ {
+   password a;
+   int quietOutput = 0;
++  int urandom = 0;
+ 
+   try
+   {
+-    if (parseCmdLine (argc, argv, &a, &quietOutput) != 0) return -1;
+-    a.generate ();
++    if (parseCmdLine (argc, argv, &a, &quietOutput, &urandom) != 0) return -1;
++    a.generate (urandom);
+   }
+     
+   catch (pwdgenerr err)
+diff -burN passwdgen-2.2.orig/src/man/passwdgen.1 passwdgen-2.2/src/man/passwdgen.1
+--- passwdgen-2.2.orig/src/man/passwdgen.1	2005-08-07 13:00:24.000000000 +0000
++++ passwdgen-2.2/src/man/passwdgen.1	2005-08-07 13:02:25.000000000 +0000
+@@ -48,6 +48,10 @@
+ .B -q, --quiet
+ Output only the password, this is useful for frontends or scripts to use.
+ .TP
++.B -u, --urandom
++When generating password, use /dev/urandom instead of /dev/random
++as an entropy source.
++.TP
+ .B --version
+ Display version information and exit.
+ .TP
