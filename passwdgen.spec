@@ -2,7 +2,7 @@ Summary:	Random password generator
 Summary(pl):	Generator losowych hase³
 Name:		passwdgen
 Version:	2.2
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{name}-%{version}.tar.gz
@@ -11,6 +11,7 @@ Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-gcc3.patch
 Patch2:		%{name}-acfix.patch
 Patch3:		%{name}-urandom.patch
+Patch4:		%{name}-optfix.patch
 URL:		http://members.home.com/denisl/passwdgen/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -59,6 +60,7 @@ Statyczna wersja biblioteki passwdgen.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
