@@ -1,0 +1,13 @@
+Pliki passwdgen-2.2.orig/class/.libs/libpasswdgen.a i passwdgen-2.2/class/.libs/libpasswdgen.a ró¿ni± siê
+diff -Nur passwdgen-2.2.orig/src/cli.cpp passwdgen-2.2/src/cli.cpp
+--- passwdgen-2.2.orig/src/cli.cpp	2005-09-13 09:48:36.000000000 +0200
++++ passwdgen-2.2/src/cli.cpp	2005-09-13 10:03:30.000000000 +0200
+@@ -102,7 +102,7 @@
+ 
+   do {
+     option_index = 0;
+-    option = getopt_long (argc, argv, "aA1@frbpqu", long_options, &option_index);
++    option = getopt_long (argc, argv, "aA1@flrbpqu", long_options, &option_index);
+ 
+     switch (option) {
+       case 'a': passwdType = passwdType + 1; break;
