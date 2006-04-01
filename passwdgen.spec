@@ -5,14 +5,14 @@ Version:	2.2
 Release:	5
 License:	GPL
 Group:		Applications/System
-Source0:	http://members-http-4.rwc1.sfba.home.net/denisl/passwdgen/download/%{name}-%{version}.tar.gz
+Source0:	http://www.securityfocus.com/data/tools/%{name}-%{version}.tar.gz
 # Source0-md5:	097cf193d1b040cf0d135945714faa83
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-gcc3.patch
 Patch2:		%{name}-acfix.patch
 Patch3:		%{name}-urandom.patch
 Patch4:		%{name}-optfix.patch
-URL:		http://members.home.com/denisl/passwdgen/
+URL:		http://directory.fsf.org/pwdgen.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
