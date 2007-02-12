@@ -1,5 +1,5 @@
 Summary:	Random password generator
-Summary(pl):	Generator losowych hase³
+Summary(pl.UTF-8):   Generator losowych haseÅ‚
 Name:		passwdgen
 Version:	2.2
 Release:	5
@@ -24,14 +24,14 @@ passwdgen is a utility for generating random passwords. Amongst
 passwdgen's features is the ability to generate pronounceable
 passwords and passwords of entirely left, right, or alternating keys.
 
-%description -l pl
-passwdgen jest narzêdziem do generowania losowych hase³. Mo¿e
-generowaæ has³a mo¿liwe do wymówienia, a tak¿e sk³adaj±ce siê ze
-znaków wprowadzanych jedn± rêk±.
+%description -l pl.UTF-8
+passwdgen jest narzÄ™dziem do generowania losowych haseÅ‚. MoÅ¼e
+generowaÄ‡ hasÅ‚a moÅ¼liwe do wymÃ³wienia, a takÅ¼e skÅ‚adajÄ…ce siÄ™ ze
+znakÃ³w wprowadzanych jednÄ… rÄ™kÄ….
 
 %package devel
 Summary:	passwdgen development package
-Summary(pl):	passwdgen dla programistów
+Summary(pl.UTF-8):   passwdgen dla programistÃ³w
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -39,19 +39,19 @@ Requires:	libstdc++-devel
 %description devel
 Header files and libtool script for linking with passwdgen library.
 
-%description devel -l pl
-Pliki nag³ówkowe i skrypt libtoola do biblioteki passwdgen.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe i skrypt libtoola do biblioteki passwdgen.
 
 %package static
 Summary:	passwdgen static library
-Summary(pl):	Statyczna biblioteka passwdgen
+Summary(pl.UTF-8):   Statyczna biblioteka passwdgen
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of passwdgen library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja biblioteki passwdgen.
 
 %prep
