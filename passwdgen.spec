@@ -1,5 +1,5 @@
 Summary:	Random password generator
-Summary(pl.UTF-8):   Generator losowych haseł
+Summary(pl.UTF-8):	Generator losowych haseł
 Name:		passwdgen
 Version:	2.2
 Release:	5
@@ -31,7 +31,7 @@ znaków wprowadzanych jedną ręką.
 
 %package devel
 Summary:	passwdgen development package
-Summary(pl.UTF-8):   passwdgen dla programistów
+Summary(pl.UTF-8):	passwdgen dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -44,7 +44,7 @@ Pliki nagłówkowe i skrypt libtoola do biblioteki passwdgen.
 
 %package static
 Summary:	passwdgen static library
-Summary(pl.UTF-8):   Statyczna biblioteka passwdgen
+Summary(pl.UTF-8):	Statyczna biblioteka passwdgen
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
