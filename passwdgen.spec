@@ -2,7 +2,7 @@ Summary:	Random password generator
 Summary(pl.UTF-8):	Generator losowych haseł
 Name:		passwdgen
 Version:	2.2
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.securityfocus.com/data/tools/%{name}-%{version}.tar.gz
