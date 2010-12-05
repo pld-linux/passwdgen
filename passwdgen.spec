@@ -2,7 +2,7 @@ Summary:	Random password generator
 Summary(pl.UTF-8):	Generator losowych haseł
 Name:		passwdgen
 Version:	2.2
-Release:	6
+Release:	7
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.securityfocus.com/data/tools/%{name}-%{version}.tar.gz
@@ -12,6 +12,7 @@ Patch1:		%{name}-gcc3.patch
 Patch2:		%{name}-acfix.patch
 Patch3:		%{name}-urandom.patch
 Patch4:		%{name}-optfix.patch
+Patch5:		%{name}-gcc4.patch
 URL:		http://directory.fsf.org/pwdgen.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -61,6 +62,7 @@ Statyczna wersja biblioteki passwdgen.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
