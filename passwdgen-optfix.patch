@@ -1,13 +1,34 @@
-Pliki passwdgen-2.2.orig/class/.libs/libpasswdgen.a i passwdgen-2.2/class/.libs/libpasswdgen.a ró¿ni± siê
-diff -Nur passwdgen-2.2.orig/src/cli.cpp passwdgen-2.2/src/cli.cpp
---- passwdgen-2.2.orig/src/cli.cpp	2005-09-13 09:48:36.000000000 +0200
-+++ passwdgen-2.2/src/cli.cpp	2005-09-13 10:03:30.000000000 +0200
+diff -burN passwdgen-2.2/src/cli.cpp passwdgen-2.2-optfix/src/cli.cpp
+--- passwdgen-2.2/src/cli.cpp	2010-12-05 14:23:04.850489129 +0100
++++ passwdgen-2.2-optfix/src/cli.cpp	2010-12-05 14:25:06.727391090 +0100
+@@ -53,15 +53,15 @@
+        << "  -p, --pronounceable\tgenerate pronounceable passwords\n"
+        << "  -l, --lefthand\tinclude only left hand characters\n"
+        << "  -r, --righthand\tinclude only right hand characters\n"
+-       << "      --alternate\talternate between left and right hand characters\n"
+-       << "      --length=LENGTH\tspecify a fixed password length (4 min, 20 max)\n"
+-       << "      --min=LENGTH\tminimum password length (4 min, 20 max, 6 default)\n"
+-       << "      --max=LENGTH\tmaximum password length (4 min, 20 max, 8 default)\n\n"
++       << "  -b  --alternate\talternate between left and right hand characters\n"
++       << "  -f  --length=LENGTH\tspecify a fixed password length (4 min, 20 max)\n"
++       << "  -m  --min=LENGTH\tminimum password length (4 min, 20 max, 6 default)\n"
++       << "  -M  --max=LENGTH\tmaximum password length (4 min, 20 max, 8 default)\n\n"
+        << "other options:\n"
+        << "  -q, --quiet\t\toutput password only, no verbosity\n"
+        << "  -u, --urandom\t\tuse /dev/urandom instead of /dev/random\n"
+-       << "      --version\t\tdisplay version information and exit\n"
+-       << "      --help\t\tdisplay this help and exit\n\n"
++       << "  -v  --version\t\tdisplay version information and exit\n"
++       << "  -h  --help\t\tdisplay this help and exit\n\n"
+        << "Report bugs to <denis@lemire.com>.\n";
+ }
+ 
 @@ -102,7 +102,7 @@
  
    do {
      option_index = 0;
 -    option = getopt_long (argc, argv, "aA1@frbpqu", long_options, &option_index);
-+    option = getopt_long (argc, argv, "aA1@flrbpqu", long_options, &option_index);
++    option = getopt_long (argc, argv, "abA1@fhmMlrbpqu", long_options, &option_index);
  
      switch (option) {
        case 'a': passwdType = passwdType + 1; break;
